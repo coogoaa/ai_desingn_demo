@@ -1,7 +1,7 @@
 <html lang="en"><head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-    <title>Embedded Modals · Solution / Brand / Templates</title>
+    <title>Supercharge Your Solar Business with AI</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
@@ -17,8 +17,8 @@
     <main class="mx-auto w-full max-w-6xl px-6 pt-16 pb-24">
       <!-- Hero -->
       <section class="text-center">
-        <h1 class="mx-auto max-w-4xl text-5xl sm:text-6xl md:text-7xl font-semibold tracking-tight leading-[0.95] text-gray-900">
-          Power Your Solar Business with AI
+        <h1 id="page-title" class="mx-auto max-w-4xl text-5xl sm:text-6xl md:text-7xl font-semibold tracking-tight leading-[0.95] text-gray-900">
+          
         </h1>
         <p class="mx-auto mt-6 max-w-2xl text-lg md:text-xl text-gray-600">
           Enter your customer’s needs and let AI handle roof surveying, panel layout, energy yield simulation, and generate a professional proposal in one click.
@@ -652,6 +652,11 @@
         selectInGroup(solPlansEl, state.solution.plan);
         selectInGroup(brandDeviceTypeEl, state.brand.deviceType);
         renderBrandsFor(state.brand.deviceType);
+        // Auto-fill hero title from <title> if empty
+        const h1 = document.getElementById('page-title');
+        if (h1 && !h1.textContent.trim()) {
+          h1.textContent = document.title;
+        }
         lucide.createIcons();
       }
       document.addEventListener('DOMContentLoaded', initDefaults);
