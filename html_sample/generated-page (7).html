@@ -1,0 +1,666 @@
+<html lang="zh-CN"><head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <title>对话框内嵌弹窗 · 方案/品牌/模板选择</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+  </head>
+  <body class="min-h-screen bg-white text-gray-900 antialiased" style="font-family: Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, 'Apple Color Emoji', 'Segoe UI Emoji'">
+    <!-- soft grid background -->
+    <div aria-hidden="true" class="pointer-events-none fixed inset-0 -z-10">
+      <div class="h-full w-full" style="background-image: linear-gradient(to right, rgba(0,0,0,0.04) 1px, transparent 1px), linear-gradient(to bottom, rgba(0,0,0,0.04) 1px, transparent 1px); background-size: 80px 80px;"></div>
+    </div>
+
+    <main class="mx-auto w-full max-w-6xl px-6 pt-16 pb-24">
+      <!-- Hero -->
+      <section class="text-center">
+        <h1 class="mx-auto max-w-4xl text-5xl sm:text-6xl md:text-7xl font-semibold tracking-tight leading-[0.95] text-gray-900">
+          为您的光伏业务，注入 AI 动力
+        </h1>
+        <p class="mx-auto mt-6 max-w-2xl text-lg md:text-xl text-gray-600">
+          输入客户的需求，AI 自动完成屋顶勘测、组件排布、发电量模拟，并一键生成专业级方案建议书。
+        </p>
+      </section>
+
+      <!-- Compose Card -->
+      <section class="mx-auto mt-12 max-w-4xl">
+        <div id="compose-card" class="relative rounded-3xl border border-gray-200 bg-white/80 shadow-[0_10px_40px_-20px_rgba(0,0,0,0.25)] backdrop-blur">
+          <!-- Textarea -->
+          <div class="px-5 py-4 md:px-6 md:py-5">
+            <textarea id="prompt" rows="3" placeholder="Create something beautiful..." class="w-full resize-none bg-transparent outline-none placeholder:text-gray-400 text-gray-900 text-base md:text-lg leading-relaxed"></textarea>
+          </div>
+
+          <!-- Actions -->
+          <div class="flex items-center justify-between gap-2 px-4 pb-4 md:px-5 md:pb-5">
+            <div class="flex flex-wrap items-center gap-2">
+              <!-- 方案选择 -->
+              <button id="btn-solution" type="button" class="group inline-flex items-center gap-2 rounded-2xl border border-gray-200 bg-white px-3.5 py-2 text-sm text-gray-700 hover:border-gray-300 hover:bg-gray-50 transition">
+                <i data-lucide="wand-2" class="h-4 w-4 text-gray-700"></i>
+                <span>方案选择</span>
+              </button>
+
+              <!-- 品牌参考 -->
+              <button id="btn-brand" type="button" class="group inline-flex items-center gap-2 rounded-2xl border border-gray-200 bg-white px-3.5 py-2 text-sm text-gray-700 hover:border-gray-300 hover:bg-gray-50 transition">
+                <i data-lucide="bookmark-check" class="h-4 w-4 text-gray-700"></i>
+                <span>品牌参考</span>
+              </button>
+
+              <!-- 定制模板 -->
+              <button id="btn-template" type="button" class="group inline-flex items-center gap-2 rounded-2xl border border-gray-200 bg-white px-3.5 py-2 text-sm text-gray-700 hover:border-gray-300 hover:bg-gray-50 transition">
+                <i data-lucide="layout-grid" class="h-4 w-4 text-gray-700"></i>
+                <span>定制模板</span>
+              </button>
+
+              <!-- 附件（简洁图标） -->
+              <button id="btn-attach" type="button" class="inline-flex items-center justify-center rounded-xl border border-gray-200 bg-white p-2 text-gray-700 hover:border-gray-300 hover:bg-gray-50 transition">
+                <i data-lucide="paperclip" class="h-4 w-4"></i>
+              </button>
+              <input id="file-input" type="file" class="hidden">
+            </div>
+
+            <!-- Send -->
+            <button type="button" id="btn-send" class="flex h-9 w-9 items-center justify-center rounded-2xl border border-gray-200 bg-white text-gray-800 hover:bg-gray-50 hover:border-gray-300 transition">
+              <i data-lucide="arrow-up" class="h-4 w-4"></i>
+            </button>
+          </div>
+
+          <!-- Panels container (embedded inside the chat card) -->
+          <div id="panels" class="pointer-events-none absolute inset-x-0 bottom-[84px] px-4 md:px-5">
+            <!-- 方案选择 Panel -->
+            <div id="panel-solution" class="pointer-events-auto hidden rounded-2xl border border-gray-200 bg-white shadow-2xl">
+              <div class="flex items-center justify-between px-4 py-3">
+                <div class="flex items-center gap-2">
+                  <i data-lucide="wand-2" class="h-4 w-4 text-gray-800"></i>
+                  <h3 class="text-base font-medium tracking-tight text-gray-900">选择方案</h3>
+                </div>
+                <button data-close="solution" class="rounded-lg p-1.5 text-gray-500 hover:bg-gray-50"><i data-lucide="x" class="h-4 w-4"></i></button>
+              </div>
+              <div class="px-4 pb-4">
+                <p class="text-sm text-gray-600 mb-3">选择内容类型与优先级。</p>
+                <!-- 类型 -->
+                <div class="mb-4">
+                  <div class="text-xs text-gray-500 mb-2">类型</div>
+                  <div id="solution-type" class="flex flex-wrap gap-2">
+                    <button data-value="落地页" class="pill-btn">落地页</button>
+                    <button data-value="品牌海报" class="pill-btn">品牌海报</button>
+                    <button data-value="社媒卡片" class="pill-btn">社媒卡片</button>
+                    <button data-value="邮件" class="pill-btn">邮件</button>
+                    <button data-value="演示文稿" class="pill-btn">演示文稿</button>
+                  </div>
+                </div>
+                <!-- 优先级 -->
+                <div class="mb-4">
+                  <div class="text-xs text-gray-500 mb-2">优先级</div>
+                  <div id="solution-priority" class="flex flex-wrap gap-2">
+                    <button data-value="标准" class="pill-btn">标准</button>
+                    <button data-value="极速" class="pill-btn">极速</button>
+                    <button data-value="高级" class="pill-btn">高级</button>
+                  </div>
+                </div>
+                <div class="flex items-center justify-end gap-2">
+                  <button data-close="solution" class="rounded-xl px-3 py-2 text-sm text-gray-600 hover:bg-gray-50">取消</button>
+                  <button id="solution-apply" class="rounded-xl bg-gray-900 px-3.5 py-2 text-sm text-white hover:bg-gray-800">确定</button>
+                </div>
+              </div>
+            </div>
+
+            <!-- 品牌参考 Panel -->
+            <div id="panel-brand" class="pointer-events-auto hidden rounded-2xl border border-gray-200 bg-white shadow-2xl">
+              <div class="flex items-center justify-between px-4 py-3">
+                <div class="flex items-center gap-2">
+                  <i data-lucide="bookmark-check" class="h-4 w-4 text-gray-800"></i>
+                  <h3 class="text-base font-medium tracking-tight text-gray-900">品牌参考</h3>
+                </div>
+                <button data-close="brand" class="rounded-lg p-1.5 text-gray-500 hover:bg-gray-50"><i data-lucide="x" class="h-4 w-4"></i></button>
+              </div>
+              <div class="px-4 pb-4">
+                <p class="text-sm text-gray-600 mb-3">选择品牌类型与具体品牌。</p>
+                <!-- 品牌类型（自定义下拉） -->
+                <div class="mb-4">
+                  <div class="text-xs text-gray-500 mb-2">类型</div>
+                  <div id="brand-type" class="flex flex-wrap gap-2">
+                    <button data-value="科技" class="pill-btn">科技</button>
+                    <button data-value="时尚" class="pill-btn">时尚</button>
+                    <button data-value="运动" class="pill-btn">运动</button>
+                    <button data-value="金融" class="pill-btn">金融</button>
+                    <button data-value="生活方式" class="pill-btn">生活方式</button>
+                  </div>
+                </div>
+                <!-- 品牌列表 -->
+                <div class="mb-4">
+                  <div class="text-xs text-gray-500 mb-2">品牌</div>
+                  <div id="brand-list" class="grid grid-cols-2 sm:grid-cols-3 gap-2">
+                    <!-- items injected by JS based on type -->
+                  </div>
+                </div>
+                <div class="flex items-center justify-end gap-2">
+                  <button data-close="brand" class="rounded-xl px-3 py-2 text-sm text-gray-600 hover:bg-gray-50">取消</button>
+                  <button id="brand-apply" class="rounded-xl bg-gray-900 px-3.5 py-2 text-sm text-white hover:bg-gray-800">确定</button>
+                </div>
+              </div>
+            </div>
+
+            <!-- 定制模板 Panel -->
+            <div id="panel-template" class="pointer-events-auto hidden rounded-2xl border border-gray-200 bg-white shadow-2xl">
+              <div class="flex items-center justify-between px-4 py-3">
+                <div class="flex items-center gap-2">
+                  <i data-lucide="layout-grid" class="h-4 w-4 text-gray-800"></i>
+                  <h3 class="text-base font-medium tracking-tight text-gray-900">定制模板</h3>
+                </div>
+                <button data-close="template" class="rounded-lg p-1.5 text-gray-500 hover:bg-gray-50"><i data-lucide="x" class="h-4 w-4"></i></button>
+              </div>
+              <div class="px-4 pb-4">
+                <p class="text-sm text-gray-600 mb-3">选择模板类型并选中一个模板。</p>
+                <!-- 模板类型 -->
+                <div class="mb-4">
+                  <div class="text-xs text-gray-500 mb-2">类型</div>
+                  <div id="template-type" class="flex flex-wrap gap-2">
+                    <button data-value="海报" class="pill-btn">海报</button>
+                    <button data-value="卡片" class="pill-btn">卡片</button>
+                    <button data-value="简报" class="pill-btn">简报</button>
+                    <button data-value="电商" class="pill-btn">电商</button>
+                  </div>
+                </div>
+                <!-- 模板网格 -->
+                <div id="template-grid" class="grid grid-cols-2 sm:grid-cols-3 gap-3">
+                  <!-- cards injected by JS -->
+                </div>
+                <div class="mt-4 flex items-center justify-end gap-2">
+                  <button data-close="template" class="rounded-xl px-3 py-2 text-sm text-gray-600 hover:bg-gray-50">取消</button>
+                  <button id="template-apply" class="rounded-xl bg-gray-900 px-3.5 py-2 text-sm text-white hover:bg-gray-800">确定</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Selected summary -->
+        <div id="summary" class="mt-4 hidden rounded-2xl border border-gray-200 bg-white px-4 py-3 text-sm text-gray-700">
+          <div class="flex flex-wrap items-center gap-x-3 gap-y-2">
+            <span class="inline-flex items-center gap-1.5 rounded-xl bg-gray-100 px-2.5 py-1 text-gray-800">
+              <i data-lucide="wand-2" class="h-4 w-4"></i>
+              <span id="summary-solution">方案：-</span>
+            </span>
+            <span class="inline-flex items-center gap-1.5 rounded-xl bg-gray-100 px-2.5 py-1 text-gray-800">
+              <i data-lucide="bookmark-check" class="h-4 w-4"></i>
+              <span id="summary-brand">品牌：-</span>
+            </span>
+            <span class="inline-flex items-center gap-1.5 rounded-xl bg-gray-100 px-2.5 py-1 text-gray-800">
+              <i data-lucide="layout-grid" class="h-4 w-4"></i>
+              <span id="summary-template">模板：-</span>
+            </span>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Reusable pill button class via utility composition -->
+    
+    <!-- 第二屏：痛点 (The Grind) - 我们懂你每天的挣扎 -->
+    <section class="mx-auto w-full max-w-6xl px-6 py-20">
+      <div class="mb-10 text-center">
+        <h2 class="text-3xl md:text-4xl font-semibold tracking-tight">Still Stuck in the Old Ways?</h2>
+        <p class="mt-3 text-gray-600">我们懂你每天的挣扎</p>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
+        <!-- 左侧：过去/痛点 -->
+        <div class="rounded-3xl border border-gray-200 overflow-hidden bg-gray-900 text-gray-100">
+          <div class="px-6 py-5 border-b border-white/10">
+            <h3 class="text-lg font-medium">Your Daily Grind</h3>
+          </div>
+          <div class="p-6 space-y-4">
+            <!-- 卡片 1 -->
+            <div class="rounded-2xl border border-white/10 bg-white/5 p-4">
+              <div class="flex items-start gap-3">
+                <i data-lucide="clock" class="h-5 w-5 mt-0.5 text-gray-200"></i>
+                <div>
+                  <div class="font-medium">Hours on Nearmap & Manual Layouts</div>
+                  <p class="text-sm text-gray-300">Wasting your day drawing panels, hoping you've got the measurements right.</p>
+                </div>
+              </div>
+            </div>
+            <!-- 卡片 2 -->
+            <div class="rounded-2xl border border-white/10 bg-white/5 p-4">
+              <div class="flex items-start gap-3">
+                <i data-lucide="sun" class="h-5 w-5 mt-0.5 text-gray-200"></i>
+                <div>
+                  <div class="font-medium">Guesswork on Shading & Performance</div>
+                  <p class="text-sm text-gray-300">Inaccurate shade reports leading to unhappy customers and performance claims.</p>
+                </div>
+              </div>
+            </div>
+            <!-- 卡片 3 -->
+            <div class="rounded-2xl border border-white/10 bg-white/5 p-4">
+              <div class="flex items-start gap-3">
+                <i data-lucide="file-spreadsheet" class="h-5 w-5 mt-0.5 text-gray-200"></i>
+                <div>
+                  <div class="font-medium">Complex Spreadsheets for Pricing & STCs</div>
+                  <p class="text-sm text-gray-300">Manual calculations for STCs, rebates, and profit margins are slow and error-prone.</p>
+                </div>
+              </div>
+            </div>
+            <!-- 卡片 4 -->
+            <div class="rounded-2xl border border-white/10 bg-white/5 p-4">
+              <div class="flex items-start gap-3">
+                <i data-lucide="file-text" class="h-5 w-5 mt-0.5 text-gray-200"></i>
+                <div>
+                  <div class="font-medium">Generic, Unprofessional Proposals</div>
+                  <p class="text-sm text-gray-300">Creating proposals in Word or PowerPoint that fail to impress and close the deal.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- 右侧：未来/解决方案 -->
+        <div class="rounded-3xl border border-gray-200 overflow-hidden bg-white">
+          <div class="px-6 py-5 border-b border-gray-200 bg-gradient-to-r from-yellow-50 to-emerald-50">
+            <h3 class="text-lg font-medium text-gray-900">The AI-Powered Solution</h3>
+          </div>
+          <div class="p-6 space-y-6">
+            <div class="grid grid-cols-1 gap-3">
+              <div class="rounded-2xl border border-gray-200 p-4 bg-white">
+                <div class="aspect-[16/9] w-full rounded-lg bg-gradient-to-br from-gray-100 to-gray-200 flex items-center justify-center text-gray-500 text-sm">AI 自动布局动图占位</div>
+                <div class="mt-3">
+                  <div class="font-semibold">Instant, Optimised Layouts.</div>
+                  <p class="text-sm text-gray-600">AI scans high-res aerial imagery, identifies obstacles, and generates the most efficient panel layout automatically.</p>
+                </div>
+              </div>
+            </div>
+            <div class="grid grid-cols-1 gap-3">
+              <div class="rounded-2xl border border-gray-200 p-4 bg-white">
+                <div class="aspect-[16/9] w-full rounded-lg bg-gradient-to-br from-emerald-50 to-emerald-100 flex items-center justify-center text-emerald-700 text-sm">全年逐小时阴影热力图占位</div>
+                <div class="mt-3">
+                  <div class="font-semibold">Bankable Shading Analysis.</div>
+                  <p class="text-sm text-gray-600">Precision 3D modelling provides year-round shading data you can trust, ensuring your performance estimates are accurate and reliable.</p>
+                </div>
+              </div>
+            </div>
+            <div class="grid grid-cols-1 gap-3">
+              <div class="rounded-2xl border border-gray-200 p-4 bg-white">
+                <div class="aspect-[16/9] w-full rounded-lg bg-gradient-to-br from-sky-50 to-sky-100 flex items-center justify-center text-sky-700 text-sm">财务仪表盘占位</div>
+                <div class="mt-3">
+                  <div class="font-semibold">Automated Quoting & Financials.</div>
+                  <p class="text-sm text-gray-600">Your pricing, your suppliers, and real-time STC values are built-in. Generate a complete, profitable quote in seconds.</p>
+                </div>
+              </div>
+            </div>
+            <div class="grid grid-cols-1 gap-3">
+              <div class="rounded-2xl border border-gray-200 p-4 bg-white">
+                <div class="aspect-[16/9] w-full rounded-lg bg-gradient-to-br from-violet-50 to-violet-100 flex items-center justify-center text-violet-700 text-sm">专业品牌化 PDF 报告缩略图占位</div>
+                <div class="mt-3">
+                  <div class="font-semibold">Win More with Stunning Proposals.</div>
+                  <p class="text-sm text-gray-600">Generate beautiful, branded, and persuasive sales proposals that build customer confidence and set you apart from the competition.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <p class="mt-8 text-center text-gray-800 font-medium">Focus on what you do best: quality installs and happy customers.</p>
+    </section>
+
+    <!-- 第三屏：核心能力 (Your New Toolkit) -->
+    <section class="mx-auto w-full max-w-6xl px-6 py-20">
+      <div class="mb-10 text-center">
+        <h2 class="text-3xl md:text-4xl font-semibold tracking-tight">More Than Just Software. It's Your Unfair Advantage.</h2>
+        <p class="mt-3 text-gray-600">不止是工具，更是业务助推器</p>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
+        <!-- 模块一 -->
+        <div class="rounded-3xl border border-gray-200 bg-white p-5">
+          <div class="aspect-[4/3] w-full rounded-xl bg-gradient-to-br from-gray-100 to-gray-200 flex items-center justify-center text-gray-600 text-sm">地址输入 + 预设模板预览 动图占位</div>
+          <h3 class="mt-4 text-lg font-semibold">From Enquiry to Quote in Minutes</h3>
+          <p class="mt-2 text-sm text-gray-600">Handle customer enquiries instantly. Use pre-built templates for your most popular packages or create a custom design on the fly. Respond to leads faster than your competitors and win the job before they've even opened their laptop.</p>
+        </div>
+        <!-- 模块二 -->
+        <div class="rounded-3xl border border-gray-200 bg-white p-5">
+          <div class="aspect-[4/3] w-full rounded-xl bg-gradient-to-br from-emerald-50 to-emerald-100 flex items-center justify-center text-emerald-700 text-sm">3D 屋顶 + 阴影路径 + 组串示意 占位<br/><span class="mt-2 inline-flex items-center gap-2 rounded-full bg-emerald-600 text-white text-xs px-2.5 py-1">CEC Design Guidelines Compliant</span></div>
+          <h3 class="mt-4 text-lg font-semibold">Design with Unmatched Precision & Compliance</h3>
+          <p class="mt-2 text-sm text-gray-600">Our platform uses the latest high-resolution aerial imagery (including Nearmap) and 3D data to ensure every measurement is precise. All designs are automatically checked against CEC guidelines, giving you and your customer complete peace of mind.</p>
+        </div>
+        <!-- 模块三 -->
+        <div class="rounded-3xl border border-gray-200 bg-white p-5">
+          <div class="aspect-[4/3] w-full rounded-xl bg-gradient-to-br from-sky-50 to-sky-100 flex items-center justify-center text-sky-700 text-sm">品牌选择 + 成本/利润率 设置 动态占位</div>
+          <h3 class="mt-4 text-lg font-semibold">Customised for YOUR Business</h3>
+          <p class="mt-2 text-sm text-gray-600">This is your platform. Add your preferred panels, inverters, and batteries. Input your own pricing, labour costs, and profit margins. We provide the engine; you steer the business. It’s fully flexible to match the way you work.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 第四屏：社会认同 (Trusted By The Best) -->
+    <section class="mx-auto w-full max-w-6xl px-6 py-20">
+      <div class="mb-10 text-center">
+        <h2 class="text-3xl md:text-4xl font-semibold tracking-tight">Join Hundreds of Aussie Installers Designing Smarter</h2>
+        <p class="mt-3 text-gray-600">加入澳洲顶尖安装商的行列</p>
+      </div>
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <!-- 左侧：客户评价 -->
+        <div class="rounded-3xl border border-gray-200 bg-white p-6">
+          <div class="flex items-start gap-4">
+            <img src="https://images.unsplash.com/photo-1502685104226-ee32379fefbe?q=80&w=200&auto=format&fit=crop" class="h-12 w-12 rounded-full object-cover" alt="avatar"/>
+            <div>
+              <div class="font-semibold">Dave M., Sun-Powered Solar, VIC</div>
+              <p class="mt-2 text-sm text-gray-700">“This tool has been a game-changer. I used to spend my evenings doing designs and proposals. Now I can get a fully detailed, professional quote out to a customer while I'm still in their driveway. My quote-to-sale conversion rate has genuinely increased by over 30%. ”</p>
+              <p class="mt-2 text-xs text-gray-500">更具体的业务指标，凸显转化率提升</p>
+            </div>
+          </div>
+        </div>
+        <!-- 右侧：品牌 Logo 墙 + 信任徽章 -->
+        <div class="rounded-3xl border border-gray-200 bg-white p-6">
+          <h3 class="text-sm font-medium text-gray-700">Our Platform Supports the Brands You Trust</h3>
+          <div class="mt-4 grid grid-cols-3 sm:grid-cols-4 gap-4">
+            <div class="aspect-[3/1] rounded-lg bg-gray-100 flex items-center justify-center text-gray-500 text-xs">Fronius</div>
+            <div class="aspect-[3/1] rounded-lg bg-gray-100 flex items-center justify-center text-gray-500 text-xs">Sungrow</div>
+            <div class="aspect-[3/1] rounded-lg bg-gray-100 flex items-center justify-center text-gray-500 text-xs">Enphase</div>
+            <div class="aspect-[3/1] rounded-lg bg-gray-100 flex items-center justify-center text-gray-500 text-xs">Tesla</div>
+            <div class="aspect-[3/1] rounded-lg bg-gray-100 flex items-center justify-center text-gray-500 text-xs">REC</div>
+            <div class="aspect-[3/1] rounded-lg bg-gray-100 flex items-center justify-center text-gray-500 text-xs">Jinko</div>
+            <div class="aspect-[3/1] rounded-lg bg-gray-100 flex items-center justify-center text-gray-500 text-xs">Trina</div>
+            <div class="aspect-[3/1] rounded-lg bg-gray-100 flex items-center justify-center text-gray-500 text-xs">LONGi</div>
+          </div>
+          <div class="mt-6 grid grid-cols-1 sm:grid-cols-3 gap-3">
+            <div class="flex items-center gap-2 rounded-xl border border-gray-200 px-3 py-2">
+              <div class="h-6 w-6 rounded-full bg-gray-900 flex items-center justify-center text-white text-[10px]">CEC</div>
+              <div class="text-sm font-medium">CEC Compliant Design Engine</div>
+            </div>
+            <div class="flex items-center gap-2 rounded-xl border border-gray-200 px-3 py-2">
+              <div class="h-6 w-6 rounded-full bg-emerald-600 flex items-center justify-center text-white text-[10px]">Near</div>
+              <div class="text-sm font-medium">High-Resolution Nearmap Imagery Integrated</div>
+            </div>
+            <div class="flex items-center gap-2 rounded-xl border border-gray-200 px-3 py-2">
+              <i data-lucide="lock" class="h-5 w-5 text-gray-700"></i>
+              <div class="text-sm font-medium">Secure & Private</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <script>
+      // add a helper to style "pill-btn" using Tailwind classes via JS (no custom CSS file)
+      function stylePillButtons(scope=document) {
+        scope.querySelectorAll('.pill-btn').forEach(btn => {
+          btn.className = 'pill-btn inline-flex items-center justify-center rounded-2xl border border-gray-200 bg-white px-3 py-1.5 text-sm text-gray-700 hover:bg-gray-50 hover:border-gray-300 transition';
+        });
+      }
+      document.addEventListener('DOMContentLoaded', stylePillButtons);
+    </script>
+
+    <script>
+      const panels = {
+        solution: document.getElementById('panel-solution'),
+        brand: document.getElementById('panel-brand'),
+        template: document.getElementById('panel-template'),
+      };
+      const state = {
+        open: null,
+        solution: { type: null, priority: null },
+        brand: { type: '科技', item: null },
+        template: { type: '海报', id: null },
+      };
+
+      function openPanel(name) {
+        Object.keys(panels).forEach(k => {
+          panels[k].classList.add('hidden');
+        });
+        if (state.open === name) {
+          state.open = null;
+          return;
+        }
+        state.open = name;
+        panels[name].classList.remove('hidden');
+        // Scroll into view if near bottom on mobile
+        document.getElementById('compose-card').scrollIntoView({ block: 'center', behavior: 'smooth' });
+      }
+
+      // Bind openers
+      document.getElementById('btn-solution').addEventListener('click', () => openPanel('solution'));
+      document.getElementById('btn-brand').addEventListener('click', () => openPanel('brand'));
+      document.getElementById('btn-template').addEventListener('click', () => openPanel('template'));
+
+      // Close buttons
+      document.querySelectorAll('[data-close]').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const name = btn.getAttribute('data-close');
+          if (panels[name]) panels[name].classList.add('hidden');
+          state.open = null;
+        });
+      });
+
+      // 方案选择 interactions
+      const solTypeEl = document.getElementById('solution-type');
+      const solPrioEl = document.getElementById('solution-priority');
+
+      function selectInGroup(container, value) {
+        container.querySelectorAll('button').forEach(b => {
+          if (b.getAttribute('data-value') === value) {
+            b.classList.add('bg-gray-900','text-white','border-gray-900');
+            b.classList.remove('bg-white','text-gray-700');
+          } else {
+            b.classList.remove('bg-gray-900','text-white','border-gray-900');
+            b.classList.add('bg-white','text-gray-700');
+          }
+        });
+      }
+
+      solTypeEl.addEventListener('click', (e) => {
+        if (e.target.closest('button')) {
+          const val = e.target.closest('button').getAttribute('data-value');
+          state.solution.type = val;
+          selectInGroup(solTypeEl, val);
+        }
+      });
+      solPrioEl.addEventListener('click', (e) => {
+        if (e.target.closest('button')) {
+          const val = e.target.closest('button').getAttribute('data-value');
+          state.solution.priority = val;
+          selectInGroup(solPrioEl, val);
+        }
+      });
+
+      document.getElementById('solution-apply').addEventListener('click', () => {
+        if (!state.solution.type) state.solution.type = '落地页';
+        if (!state.solution.priority) state.solution.priority = '标准';
+        updateSummary();
+        panels.solution.classList.add('hidden');
+        state.open = null;
+      });
+
+      // 品牌参考 interactions
+      const brandMap = {
+        '科技': ['Apple','Google','Microsoft','Adobe','Samsung','Sony'],
+        '时尚': ['Gucci','Prada','Chanel','Dior','Zara','Uniqlo'],
+        '运动': ['Nike','Adidas','Puma','New Balance','Asics','The North Face'],
+        '金融': ['Visa','Mastercard','Amex','Stripe','Revolut','Monzo'],
+        '生活方式': ['IKEA','Muji','Starbucks','Airbnb','Spotify','Netflix'],
+      };
+
+      const brandTypeEl = document.getElementById('brand-type');
+      const brandListEl = document.getElementById('brand-list');
+
+      function renderBrands(type) {
+        brandListEl.innerHTML = '';
+        (brandMap[type] || []).forEach(name => {
+          const btn = document.createElement('button');
+          btn.type = 'button';
+          btn.setAttribute('data-value', name);
+          btn.className = 'group flex items-center justify-between rounded-xl border border-gray-200 bg-white px-3 py-2 text-sm hover:bg-gray-50 hover:border-gray-300';
+          btn.innerHTML = `
+            <span class="truncate text-gray-800">${name}</span>
+            <span class="hidden group-[.selected]:block text-gray-900"><i data-lucide="check" class="h-4 w-4"></i></span>
+          `;
+          btn.addEventListener('click', () => {
+            Array.from(brandListEl.children).forEach(c => c.classList.remove('selected','border-gray-900'));
+            btn.classList.add('selected','border-gray-900');
+            state.brand.item = name;
+            lucide.createIcons();
+          });
+          brandListEl.appendChild(btn);
+        });
+        lucide.createIcons();
+      }
+
+      brandTypeEl.addEventListener('click', (e) => {
+        if (e.target.closest('button')) {
+          const val = e.target.closest('button').getAttribute('data-value');
+          state.brand.type = val;
+          selectInGroup(brandTypeEl, val);
+          state.brand.item = null;
+          renderBrands(val);
+        }
+      });
+
+      document.getElementById('brand-apply').addEventListener('click', () => {
+        if (!state.brand.item) state.brand.item = (brandMap[state.brand.type] || [])[0] || '-';
+        updateSummary();
+        panels.brand.classList.add('hidden');
+        state.open = null;
+      });
+
+      // 定制模板 interactions
+      const templateTypeEl = document.getElementById('template-type');
+      const templateGridEl = document.getElementById('template-grid');
+
+      const templateImages = {
+        '海报': [
+          'https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=1200&auto=format&fit=crop',
+          'https://images.unsplash.com/photo-1501785888041-af3ef285b470?q=80&w=1200&auto=format&fit=crop',
+          'https://images.unsplash.com/photo-1496302662116-25b3dd09a54b?q=80&w=1200&auto=format&fit=crop'
+        ],
+        '卡片': [
+          'https://images.unsplash.com/photo-1608138407090-9d524453a3ce?q=80&w=1200&auto=format&fit=crop',
+          'https://images.unsplash.com/photo-1517816743773-6e0fd518b4a6?q=80&w=1200&auto=format&fit=crop',
+          'https://images.unsplash.com/photo-1496307042754-b4aa456c4a2d?q=80&w=1200&auto=format&fit=crop'
+        ],
+        '简报': [
+          'https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=1200&auto=format&fit=crop',
+          'https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?q=80&w=1200&auto=format&fit=crop',
+          'https://images.unsplash.com/photo-1522199755839-a2bacb67c546?q=80&w=1200&auto=format&fit=crop'
+        ],
+        '电商': [
+          'https://images.unsplash.com/photo-1514944152558-30bfbfdf5eaf?q=80&w=1200&auto=format&fit=crop',
+          'https://images.unsplash.com/photo-1520975922203-bf7bd9b1f7d4?q=80&w=1200&auto=format&fit=crop',
+          'https://images.unsplash.com/photo-1512436991641-6745cdb1723f?q=80&w=1200&auto=format&fit=crop'
+        ],
+      };
+
+      function renderTemplates(type) {
+        templateGridEl.innerHTML = '';
+        (templateImages[type] || []).forEach((src, idx) => {
+          const id = `${type}-${idx+1}`;
+          const card = document.createElement('button');
+          card.type = 'button';
+          card.setAttribute('data-id', id);
+          card.className = 'group relative overflow-hidden rounded-2xl border border-gray-200 bg-white text-left hover:border-gray-300';
+          card.innerHTML = `
+            <div class="aspect-[4/3] w-full overflow-hidden">
+              <img src="${src}" alt="${type} 模板 ${idx+1}" class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-[1.03]" />
+            </div>
+            <div class="flex items-center justify-between px-3 py-2">
+              <div class="text-sm text-gray-800 truncate">${type} · 模板 ${idx+1}</div>
+              <span class="hidden group-[.selected]:inline-flex items-center rounded-lg bg-gray-900 px-1.5 py-0.5 text-[11px] font-medium text-white">已选</span>
+            </div>
+            <div class="pointer-events-none absolute inset-0 hidden group-[.selected]:block ring-2 ring-inset ring-gray-900 rounded-2xl"></div>
+          `;
+          card.addEventListener('click', () => {
+            Array.from(templateGridEl.children).forEach(c => c.classList.remove('selected'));
+            card.classList.add('selected');
+            state.template.id = id;
+          });
+          templateGridEl.appendChild(card);
+        });
+      }
+
+      templateTypeEl.addEventListener('click', (e) => {
+        if (e.target.closest('button')) {
+          const val = e.target.closest('button').getAttribute('data-value');
+          state.template.type = val;
+          selectInGroup(templateTypeEl, val);
+          state.template.id = null;
+          renderTemplates(val);
+        }
+      });
+
+      document.getElementById('template-apply').addEventListener('click', () => {
+        if (!state.template.id) state.template.id = `${state.template.type}-1`;
+        updateSummary();
+        panels.template.classList.add('hidden');
+        state.open = null;
+      });
+
+      // Summary
+      const summary = document.getElementById('summary');
+      const sSolution = document.getElementById('summary-solution');
+      const sBrand = document.getElementById('summary-brand');
+      const sTemplate = document.getElementById('summary-template');
+
+      function updateSummary() {
+        summary.classList.remove('hidden');
+        sSolution.textContent = `方案：${state.solution.type || '-'} / ${state.solution.priority || '-'}`;
+        sBrand.textContent = `品牌：${state.brand.type || '-'} / ${state.brand.item || '-'}`;
+        sTemplate.textContent = `模板：${state.template.type || '-'} / ${state.template.id || '-'}`;
+        lucide.createIcons();
+      }
+
+      // Attach
+      const fileInput = document.getElementById('file-input');
+      document.getElementById('btn-attach').addEventListener('click', () => fileInput.click());
+      fileInput.addEventListener('change', () => {
+        if (fileInput.files?.[0]) {
+          const f = fileInput.files[0];
+          const attachPill = document.createElement('span');
+          attachPill.className = 'inline-flex items-center gap-1.5 rounded-xl bg-gray-100 px-2.5 py-1 text-sm text-gray-800 mt-2';
+          attachPill.innerHTML = `<i data-lucide="file" class="h-4 w-4"></i><span>${f.name}</span>`;
+          summary.classList.remove('hidden');
+          summary.appendChild(attachPill);
+          lucide.createIcons();
+        }
+      });
+
+      // Send (demo)
+      document.getElementById('btn-send').addEventListener('click', () => {
+        console.log('发送内容：', {
+          prompt: document.getElementById('prompt').value,
+          solution: state.solution,
+          brand: state.brand,
+          template: state.template,
+        });
+        // simple feedback
+        document.getElementById('btn-send').classList.add('bg-gray-900','text-white');
+        setTimeout(()=>{
+          document.getElementById('btn-send').classList.remove('bg-gray-900','text-white');
+        }, 400);
+      });
+
+      // Initialize defaults
+      function initDefaults() {
+        // style pill buttons after DOM paint
+        stylePillButtons(document);
+        // defaults
+        selectInGroup(solTypeEl, '落地页'); state.solution.type = '落地页';
+        selectInGroup(solPrioEl, '标准'); state.solution.priority = '标准';
+        selectInGroup(brandTypeEl, state.brand.type);
+        renderBrands(state.brand.type);
+        selectInGroup(templateTypeEl, state.template.type);
+        renderTemplates(state.template.type);
+        lucide.createIcons();
+      }
+      document.addEventListener('DOMContentLoaded', initDefaults);
+
+      // Close panels when clicking outside of them but inside card actions
+      document.addEventListener('click', (e) => {
+        const card = document.getElementById('compose-card');
+        const isInsideCard = card.contains(e.target);
+        const isInsidePanel = Object.values(panels).some(p => p.contains(e.target));
+        const isButton = e.target.closest('#btn-solution, #btn-brand, #btn-template');
+        if (isInsideCard && !isInsidePanel && !isButton) {
+          Object.values(panels).forEach(p => p.classList.add('hidden'));
+          state.open = null;
+        }
+      });
+    </script>
+  
+</body></html>
