@@ -1,7 +1,7 @@
-<html lang="zh-CN"><head>
+<html lang="en"><head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-    <title>对话框内嵌弹窗 · 方案/品牌/模板选择</title>
+    <title>Embedded Modals · Solution / Brand / Templates</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
@@ -18,10 +18,10 @@
       <!-- Hero -->
       <section class="text-center">
         <h1 class="mx-auto max-w-4xl text-5xl sm:text-6xl md:text-7xl font-semibold tracking-tight leading-[0.95] text-gray-900">
-          为您的光伏业务，注入 AI 动力
+          Power Your Solar Business with AI
         </h1>
         <p class="mx-auto mt-6 max-w-2xl text-lg md:text-xl text-gray-600">
-          输入客户的需求，AI 自动完成屋顶勘测、组件排布、发电量模拟，并一键生成专业级方案建议书。
+          Enter your customer’s needs and let AI handle roof surveying, panel layout, energy yield simulation, and generate a professional proposal in one click.
         </p>
       </section>
 
@@ -36,25 +36,25 @@
           <!-- Actions -->
           <div class="flex items-center justify-between gap-2 px-4 pb-4 md:px-5 md:pb-5">
             <div class="flex flex-wrap items-center gap-2">
-              <!-- 方案选择 -->
+              <!-- Solution -->
               <button id="btn-solution" type="button" class="group inline-flex items-center gap-2 rounded-2xl border border-gray-200 bg-white px-3.5 py-2 text-sm text-gray-700 hover:border-gray-300 hover:bg-gray-50 transition">
                 <i data-lucide="wand-2" class="h-4 w-4 text-gray-700"></i>
-                <span>方案选择</span>
+                <span>Solution</span>
               </button>
 
-              <!-- 品牌参考 -->
+              <!-- Brand Preference -->
               <button id="btn-brand" type="button" class="group inline-flex items-center gap-2 rounded-2xl border border-gray-200 bg-white px-3.5 py-2 text-sm text-gray-700 hover:border-gray-300 hover:bg-gray-50 transition">
                 <i data-lucide="bookmark-check" class="h-4 w-4 text-gray-700"></i>
-                <span>品牌参考</span>
+                <span>Brand Preference</span>
               </button>
 
-              <!-- 定制模板 -->
+              <!-- Templates -->
               <button id="btn-template" type="button" class="group inline-flex items-center gap-2 rounded-2xl border border-gray-200 bg-white px-3.5 py-2 text-sm text-gray-700 hover:border-gray-300 hover:bg-gray-50 transition">
                 <i data-lucide="layout-grid" class="h-4 w-4 text-gray-700"></i>
-                <span>定制模板</span>
+                <span>Templates</span>
               </button>
 
-              <!-- 附件（简洁图标） -->
+              <!-- Attach (simple icon) -->
               <button id="btn-attach" type="button" class="inline-flex items-center justify-center rounded-xl border border-gray-200 bg-white p-2 text-gray-700 hover:border-gray-300 hover:bg-gray-50 transition">
                 <i data-lucide="paperclip" class="h-4 w-4"></i>
               </button>
@@ -69,110 +69,158 @@
 
           <!-- Panels container (embedded inside the chat card) -->
           <div id="panels" class="pointer-events-none absolute inset-x-0 bottom-[84px] px-4 md:px-5">
-            <!-- 方案选择 Panel -->
+            <!-- Solution Panel -->
             <div id="panel-solution" class="pointer-events-auto hidden rounded-2xl border border-gray-200 bg-white shadow-2xl">
               <div class="flex items-center justify-between px-4 py-3">
                 <div class="flex items-center gap-2">
                   <i data-lucide="wand-2" class="h-4 w-4 text-gray-800"></i>
-                  <h3 class="text-base font-medium tracking-tight text-gray-900">选择方案</h3>
+                  <h3 class="text-base font-medium tracking-tight text-gray-900">Choose a Solution</h3>
                 </div>
                 <button data-close="solution" class="rounded-lg p-1.5 text-gray-500 hover:bg-gray-50"><i data-lucide="x" class="h-4 w-4"></i></button>
               </div>
               <div class="px-4 pb-4">
-                <p class="text-sm text-gray-600 mb-3">请选择一个适合客户的方案。</p>
+                <p class="text-sm text-gray-600 mb-3">Please select the most suitable plan for your customer.</p>
                 <div id="solution-plans" class="grid grid-cols-2 gap-2">
-                  <button data-value="智能省电" class="pill-btn">智能省电</button>
-                  <button data-value="高效能源" class="pill-btn">高效能源</button>
-                  <button data-value="能源独立" class="pill-btn">能源独立</button>
-                  <button data-value="终极能源" class="pill-btn">终极能源</button>
+                  <button data-value="Smart Saver" class="rounded-2xl border border-gray-200 bg-white p-3 text-left hover:border-gray-300">
+                    <div class="flex items-start gap-2">
+                      <i data-lucide="leaf" class="h-4 w-4 text-emerald-600"></i>
+                      <div>
+                        <div class="text-sm font-medium text-gray-900">Smart Saver</div>
+                        <p class="mt-0.5 text-xs text-gray-600">Intelligently optimises daily usage to reduce bills.</p>
+                      </div>
+                    </div>
+                  </button>
+                  <button data-value="High Efficiency" class="rounded-2xl border border-gray-200 bg-white p-3 text-left hover:border-gray-300">
+                    <div class="flex items-start gap-2">
+                      <i data-lucide="zap" class="h-4 w-4 text-yellow-600"></i>
+                      <div>
+                        <div class="text-sm font-medium text-gray-900">High Efficiency</div>
+                        <p class="mt-0.5 text-xs text-gray-600">Maximise generation efficiency and performance.</p>
+                      </div>
+                    </div>
+                  </button>
+                  <button data-value="Energy Independence" class="rounded-2xl border border-gray-200 bg-white p-3 text-left hover:border-gray-300">
+                    <div class="flex items-start gap-2">
+                      <i data-lucide="shield-check" class="h-4 w-4 text-sky-700"></i>
+                      <div>
+                        <div class="text-sm font-medium text-gray-900">Energy Independence</div>
+                        <p class="mt-0.5 text-xs text-gray-600">Increase self-consumption and reduce grid reliance.</p>
+                      </div>
+                    </div>
+                  </button>
+                  <button data-value="Ultimate Performance" class="rounded-2xl border border-gray-200 bg-white p-3 text-left hover:border-gray-300">
+                    <div class="flex items-start gap-2">
+                      <i data-lucide="trophy" class="h-4 w-4 text-violet-700"></i>
+                      <div>
+                        <div class="text-sm font-medium text-gray-900">Ultimate Performance</div>
+                        <p class="mt-0.5 text-xs text-gray-600">Top-tier equipment and configuration for the best experience.</p>
+                      </div>
+                    </div>
+                  </button>
                 </div>
                 <div class="mt-4 flex items-center justify-end gap-2">
-                  <button data-close="solution" class="rounded-xl px-3 py-2 text-sm text-gray-600 hover:bg-gray-50">取消</button>
-                  <button id="solution-apply" class="rounded-xl bg-gray-900 px-3.5 py-2 text-sm text-white hover:bg-gray-800">确定</button>
+                  <button data-close="solution" class="rounded-xl px-3 py-2 text-sm text-gray-600 hover:bg-gray-50">Cancel</button>
+                  <button id="solution-apply" class="rounded-xl bg-gray-900 px-3.5 py-2 text-sm text-white hover:bg-gray-800">Confirm</button>
                 </div>
               </div>
             </div>
 
-            <!-- 品牌偏好 Panel -->
+            <!-- Brand Preference Panel -->
             <div id="panel-brand" class="pointer-events-auto hidden rounded-2xl border border-gray-200 bg-white shadow-2xl">
               <div class="flex items-center justify-between px-4 py-3">
                 <div class="flex items-center gap-2">
                   <i data-lucide="bookmark-check" class="h-4 w-4 text-gray-800"></i>
-                  <h3 class="text-base font-medium tracking-tight text-gray-900">品牌偏好</h3>
+                  <h3 class="text-base font-medium tracking-tight text-gray-900">Brand Preference</h3>
                 </div>
                 <button data-close="brand" class="rounded-lg p-1.5 text-gray-500 hover:bg-gray-50"><i data-lucide="x" class="h-4 w-4"></i></button>
               </div>
               <div class="px-4 pb-4">
-                <p class="text-sm text-gray-600 mb-3">先选择设备类型，再多选品牌。</p>
-                <!-- 设备类型 -->
+                <p class="text-sm text-gray-600 mb-3">First select a device type, then multi-select brands.</p>
+                <!-- Device Type -->
                 <div class="mb-4">
-                  <div class="text-xs text-gray-500 mb-2">设备类型</div>
+                  <div class="text-xs text-gray-500 mb-2">Device Type</div>
                   <div id="brand-device-type" class="flex flex-wrap gap-2">
-                    <button data-value="光伏组件" class="pill-btn">光伏组件</button>
-                    <button data-value="逆变器" class="pill-btn">逆变器</button>
-                    <button data-value="储能设备" class="pill-btn">储能设备</button>
+                    <button data-value="PV Modules" class="pill-btn">PV Modules</button>
+                    <button data-value="Inverters" class="pill-btn">Inverters</button>
+                    <button data-value="Energy Storage" class="pill-btn">Energy Storage</button>
                   </div>
                 </div>
-                <!-- 品牌多选列表 -->
+                <!-- Brand list (multi-select) -->
                 <div class="mb-2">
-                  <div class="text-xs text-gray-500 mb-2">品牌（可多选）</div>
+                  <div class="text-xs text-gray-500 mb-2">Brands (multi-select)</div>
                   <div id="brand-list" class="grid grid-cols-2 sm:grid-cols-3 gap-2">
                     <!-- items injected by JS based on device type -->
                   </div>
                 </div>
-                <div class="text-xs text-gray-500">已选计数将显示在总结中</div>
+                <div class="text-xs text-gray-500">Selected counts will appear in the summary.</div>
                 <div class="flex items-center justify-end gap-2">
-                  <button data-close="brand" class="rounded-xl px-3 py-2 text-sm text-gray-600 hover:bg-gray-50">取消</button>
-                  <button id="brand-apply" class="rounded-xl bg-gray-900 px-3.5 py-2 text-sm text-white hover:bg-gray-800">确定</button>
+                  <button data-close="brand" class="rounded-xl px-3 py-2 text-sm text-gray-600 hover:bg-gray-50">Cancel</button>
+                  <button id="brand-apply" class="rounded-xl bg-gray-900 px-3.5 py-2 text-sm text-white hover:bg-gray-800">Confirm</button>
                 </div>
               </div>
             </div>
 
-            <!-- 定制模板 Panel -->
+            <!-- Templates Panel -->
             <div id="panel-template" class="pointer-events-auto hidden rounded-2xl border border-gray-200 bg-white shadow-2xl">
               <div class="flex items-center justify-between px-4 py-3">
                 <div class="flex items-center gap-2">
                   <i data-lucide="layout-grid" class="h-4 w-4 text-gray-800"></i>
-                  <h3 class="text-base font-medium tracking-tight text-gray-900">My Business Templates（我的业务模板）</h3>
+                  <h3 class="text-base font-medium tracking-tight text-gray-900">My Business Templates</h3>
                 </div>
                 <button data-close="template" class="rounded-lg p-1.5 text-gray-500 hover:bg-gray-50"><i data-lucide="x" class="h-4 w-4"></i></button>
               </div>
               <div class="px-4 pb-4">
-                <!-- 一级菜单：四个卡片 -->
+                <!-- Level 1 menu: four small cards (icon + copy) -->
                 <div id="template-menu" class="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   <button data-section="Equipment Packages" class="group rounded-2xl border border-gray-200 p-4 text-left hover:border-gray-300">
-                    <div class="aspect-[16/9] rounded-lg bg-gradient-to-br from-gray-100 to-gray-200 flex items-center justify-center text-gray-600 text-sm">设备套餐占位</div>
-                    <div class="mt-3 font-semibold">Equipment Packages（设备套餐）</div>
-                    <p class="mt-1 text-sm text-gray-600">预设您最常用的面板、逆变器和电池组合。</p>
+                    <div class="flex items-start gap-2">
+                      <i data-lucide="package" class="h-4 w-4 text-gray-700"></i>
+                      <div>
+                        <div class="font-semibold">Equipment Packages</div>
+                        <p class="mt-1 text-sm text-gray-600">Preset your most common panel/inverter/battery combos.</p>
+                      </div>
+                    </div>
                   </button>
                   <button data-section="Design & Engineering Rules" class="group rounded-2xl border border-gray-200 p-4 text-left hover:border-gray-300">
-                    <div class="aspect-[16/9] rounded-lg bg-gradient-to-br from-emerald-50 to-emerald-100 flex items-center justify-center text-emerald-700 text-sm">设计与工程规范占位</div>
-                    <div class="mt-3 font-semibold">Design & Engineering Rules（设计与工程规范）</div>
-                    <p class="mt-1 text-sm text-gray-600">定义您的公司标准，如组件间距、安全边距和电气参数。</p>
+                    <div class="flex items-start gap-2">
+                      <i data-lucide="ruler" class="h-4 w-4 text-emerald-700"></i>
+                      <div>
+                        <div class="font-semibold">Design & Engineering Rules</div>
+                        <p class="mt-1 text-sm text-gray-600">Define spacing, safety offsets, and electrical parameters.</p>
+                      </div>
+                    </div>
                   </button>
                   <button data-section="Pricing & Quoting Logic" class="group rounded-2xl border border-gray-200 p-4 text-left hover:border-gray-300">
-                    <div class="aspect-[16/9] rounded-lg bg-gradient-to-br from-sky-50 to-sky-100 flex items-center justify-center text-sky-700 text-sm">定价与报价逻辑占位</div>
-                    <div class="mt-3 font-semibold">Pricing & Quoting Logic（定价与报价逻辑）</div>
-                    <p class="mt-1 text-sm text-gray-600">输入您的设备成本、人工费和利润率，实现自动化报价。</p>
+                    <div class="flex items-start gap-2">
+                      <i data-lucide="calculator" class="h-4 w-4 text-sky-700"></i>
+                      <div>
+                        <div class="font-semibold">Pricing & Quoting Logic</div>
+                        <p class="mt-1 text-sm text-gray-600">Device cost, labour, and margins for instant quoting.</p>
+                      </div>
+                    </div>
                   </button>
                   <button data-section="Proposal & Branding" class="group rounded-2xl border border-gray-200 p-4 text-left hover:border-gray-300">
-                    <div class="aspect-[16/9] rounded-lg bg-gradient-to-br from-violet-50 to-violet-100 flex items-center justify-center text-violet-700 text-sm">方案报告与品牌占位</div>
-                    <div class="mt-3 font-semibold">Proposal & Branding（方案报告与品牌）</div>
-                    <p class="mt-1 text-sm text-gray-600">上传您的Logo，定制面向客户的方案报告外观和内容。</p>
+                    <div class="flex items-start gap-2">
+                      <i data-lucide="file-text" class="h-4 w-4 text-violet-700"></i>
+                      <div>
+                        <div class="font-semibold">Proposal & Branding</div>
+                        <p class="mt-1 text-sm text-gray-600">Upload your logo and customise proposal look & content.</p>
+                      </div>
+                    </div>
                   </button>
                 </div>
-                <!-- 二级页面占位 -->
+                <!-- Level 2 placeholder -->
                 <div id="template-detail" class="hidden">
                   <div class="flex items-center justify-between mb-3">
-                    <div class="text-sm text-gray-500">模板配置</div>
-                    <button id="template-back" class="inline-flex items-center gap-1 rounded-xl border border-gray-200 px-2.5 py-1.5 text-sm hover:bg-gray-50"><i data-lucide="arrow-left" class="h-4 w-4"></i> 返回</button>
+                    <div class="text-sm text-gray-500">Template Configuration</div>
+                    <button id="template-back" class="inline-flex items-center gap-1 rounded-xl border border-gray-200 px-2.5 py-1.5 text-sm hover:bg-gray-50"><i data-lucide="arrow-left" class="h-4 w-4"></i> Back</button>
                   </div>
                   <div class="rounded-2xl border border-gray-200 p-4">
                     <div id="template-detail-title" class="font-semibold text-gray-900">Section</div>
-                    <p id="template-detail-desc" class="mt-1 text-sm text-gray-600">这里展示二级配置内容的占位说明。</p>
+                    <p id="template-detail-desc" class="mt-1 text-sm text-gray-600">Placeholder description for the second-level settings.</p>
                   </div>
                   <div class="mt-4 flex items-center justify-end">
-                    <button id="template-apply" class="rounded-xl bg-gray-900 px-3.5 py-2 text-sm text-white hover:bg-gray-800">设为当前</button>
+                    <button id="template-apply" class="rounded-xl bg-gray-900 px-3.5 py-2 text-sm text-white hover:bg-gray-800">Set as Current</button>
                   </div>
                 </div>
               </div>
@@ -185,15 +233,15 @@
           <div class="flex flex-wrap items-center gap-x-3 gap-y-2">
             <span class="inline-flex items-center gap-1.5 rounded-xl bg-gray-100 px-2.5 py-1 text-gray-800">
               <i data-lucide="wand-2" class="h-4 w-4"></i>
-              <span id="summary-solution">方案：-</span>
+              <span id="summary-solution">Solution: -</span>
             </span>
             <span class="inline-flex items-center gap-1.5 rounded-xl bg-gray-100 px-2.5 py-1 text-gray-800">
               <i data-lucide="bookmark-check" class="h-4 w-4"></i>
-              <span id="summary-brand">品牌：-</span>
+              <span id="summary-brand">Brands: -</span>
             </span>
             <span class="inline-flex items-center gap-1.5 rounded-xl bg-gray-100 px-2.5 py-1 text-gray-800">
               <i data-lucide="layout-grid" class="h-4 w-4"></i>
-              <span id="summary-template">模板：-</span>
+              <span id="summary-template">Template: -</span>
             </span>
           </div>
         </div>
@@ -206,7 +254,7 @@
     <section class="mx-auto w-full max-w-6xl px-6 py-20">
       <div class="mb-10 text-center">
         <h2 class="text-3xl md:text-4xl font-semibold tracking-tight">Still Stuck in the Old Ways?</h2>
-        <p class="mt-3 text-gray-600">我们懂你每天的挣扎</p>
+        <p class="mt-3 text-gray-600">We understand your daily challenges.</p>
       </div>
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
         <!-- 左侧：过去/痛点 -->
@@ -217,42 +265,38 @@
           <div class="p-6 space-y-4">
             <!-- 卡片 1 -->
             <div class="rounded-2xl border border-white/10 bg-white/5 p-4">
-              <div class="flex items-start gap-3">
-                <i data-lucide="clock" class="h-5 w-5 mt-0.5 text-gray-200"></i>
-                <div>
-                  <div class="font-medium">Hours on Nearmap & Manual Layouts</div>
-                  <p class="text-sm text-gray-300">Wasting your day drawing panels, hoping you've got the measurements right.</p>
-                </div>
+              <div class="aspect-[16/9] w-full rounded-lg bg-gradient-to-br from-gray-800 to-gray-700/80 flex items-center justify-center text-gray-300 text-sm">Nearmap / Manual layout placeholder</div>
+              <div class="mt-3">
+                <div class="text-sm text-gray-300">Time drain from manual drafting</div>
+                <div class="font-medium text-gray-50">Hours on Nearmap & Manual Layouts</div>
+                <p class="mt-1 text-sm text-gray-300">Wasting your day drawing panels, hoping you've got the measurements right.</p>
               </div>
             </div>
             <!-- 卡片 2 -->
             <div class="rounded-2xl border border-white/10 bg-white/5 p-4">
-              <div class="flex items-start gap-3">
-                <i data-lucide="sun" class="h-5 w-5 mt-0.5 text-gray-200"></i>
-                <div>
-                  <div class="font-medium">Guesswork on Shading & Performance</div>
-                  <p class="text-sm text-gray-300">Inaccurate shade reports leading to unhappy customers and performance claims.</p>
-                </div>
+              <div class="aspect-[16/9] w-full rounded-lg bg-gradient-to-br from-gray-800 to-gray-700/80 flex items-center justify-center text-gray-300 text-sm">Shading/Performance error placeholder</div>
+              <div class="mt-3">
+                <div class="text-sm text-gray-300">Unreliable estimates create risk</div>
+                <div class="font-medium text-gray-50">Guesswork on Shading & Performance</div>
+                <p class="mt-1 text-sm text-gray-300">Inaccurate shade reports leading to unhappy customers and performance claims.</p>
               </div>
             </div>
             <!-- 卡片 3 -->
             <div class="rounded-2xl border border-white/10 bg-white/5 p-4">
-              <div class="flex items-start gap-3">
-                <i data-lucide="file-spreadsheet" class="h-5 w-5 mt-0.5 text-gray-200"></i>
-                <div>
-                  <div class="font-medium">Complex Spreadsheets for Pricing & STCs</div>
-                  <p class="text-sm text-gray-300">Manual calculations for STCs, rebates, and profit margins are slow and error-prone.</p>
-                </div>
+              <div class="aspect-[16/9] w-full rounded-lg bg-gradient-to-br from-gray-800 to-gray-700/80 flex items-center justify-center text-gray-300 text-sm">STC/Quote spreadsheet placeholder</div>
+              <div class="mt-3">
+                <div class="text-sm text-gray-300">Slow, error-prone pricing workflow</div>
+                <div class="font-medium text-gray-50">Complex Spreadsheets for Pricing & STCs</div>
+                <p class="mt-1 text-sm text-gray-300">Manual calculations for STCs, rebates, and profit margins are slow and error-prone.</p>
               </div>
             </div>
             <!-- 卡片 4 -->
             <div class="rounded-2xl border border-white/10 bg-white/5 p-4">
-              <div class="flex items-start gap-3">
-                <i data-lucide="file-text" class="h-5 w-5 mt-0.5 text-gray-200"></i>
-                <div>
-                  <div class="font-medium">Generic, Unprofessional Proposals</div>
-                  <p class="text-sm text-gray-300">Creating proposals in Word or PowerPoint that fail to impress and close the deal.</p>
-                </div>
+              <div class="aspect-[16/9] w-full rounded-lg bg-gradient-to-br from-gray-800 to-gray-700/80 flex items-center justify-center text-gray-300 text-sm">Unprofessional proposal placeholder</div>
+              <div class="mt-3">
+                <div class="text-sm text-gray-300">Hard to win trust and close</div>
+                <div class="font-medium text-gray-50">Generic, Unprofessional Proposals</div>
+                <p class="mt-1 text-sm text-gray-300">Creating proposals in Word or PowerPoint that fail to impress and close the deal.</p>
               </div>
             </div>
           </div>
@@ -265,7 +309,7 @@
           <div class="p-6 space-y-6">
             <div class="grid grid-cols-1 gap-3">
               <div class="rounded-2xl border border-gray-200 p-4 bg-white">
-                <div class="aspect-[16/9] w-full rounded-lg bg-gradient-to-br from-gray-100 to-gray-200 flex items-center justify-center text-gray-500 text-sm">AI 自动布局动图占位</div>
+                <div class="aspect-[16/9] w-full rounded-lg bg-gradient-to-br from-gray-100 to-gray-200 flex items-center justify-center text-gray-500 text-sm">Auto layout animation placeholder</div>
                 <div class="mt-3">
                   <div class="font-semibold">Instant, Optimised Layouts.</div>
                   <p class="text-sm text-gray-600">AI scans high-res aerial imagery, identifies obstacles, and generates the most efficient panel layout automatically.</p>
@@ -274,7 +318,7 @@
             </div>
             <div class="grid grid-cols-1 gap-3">
               <div class="rounded-2xl border border-gray-200 p-4 bg-white">
-                <div class="aspect-[16/9] w-full rounded-lg bg-gradient-to-br from-emerald-50 to-emerald-100 flex items-center justify-center text-emerald-700 text-sm">全年逐小时阴影热力图占位</div>
+                <div class="aspect-[16/9] w-full rounded-lg bg-gradient-to-br from-emerald-50 to-emerald-100 flex items-center justify-center text-emerald-700 text-sm">Year-round hourly shading heatmap placeholder</div>
                 <div class="mt-3">
                   <div class="font-semibold">Bankable Shading Analysis.</div>
                   <p class="text-sm text-gray-600">Precision 3D modelling provides year-round shading data you can trust, ensuring your performance estimates are accurate and reliable.</p>
@@ -283,7 +327,7 @@
             </div>
             <div class="grid grid-cols-1 gap-3">
               <div class="rounded-2xl border border-gray-200 p-4 bg-white">
-                <div class="aspect-[16/9] w-full rounded-lg bg-gradient-to-br from-sky-50 to-sky-100 flex items-center justify-center text-sky-700 text-sm">财务仪表盘占位</div>
+                <div class="aspect-[16/9] w-full rounded-lg bg-gradient-to-br from-sky-50 to-sky-100 flex items-center justify-center text-sky-700 text-sm">Financial dashboard placeholder</div>
                 <div class="mt-3">
                   <div class="font-semibold">Automated Quoting & Financials.</div>
                   <p class="text-sm text-gray-600">Your pricing, your suppliers, and real-time STC values are built-in. Generate a complete, profitable quote in seconds.</p>
@@ -292,7 +336,7 @@
             </div>
             <div class="grid grid-cols-1 gap-3">
               <div class="rounded-2xl border border-gray-200 p-4 bg-white">
-                <div class="aspect-[16/9] w-full rounded-lg bg-gradient-to-br from-violet-50 to-violet-100 flex items-center justify-center text-violet-700 text-sm">专业品牌化 PDF 报告缩略图占位</div>
+                <div class="aspect-[16/9] w-full rounded-lg bg-gradient-to-br from-violet-50 to-violet-100 flex items-center justify-center text-violet-700 text-sm">Branded PDF proposal thumbnail placeholder</div>
                 <div class="mt-3">
                   <div class="font-semibold">Win More with Stunning Proposals.</div>
                   <p class="text-sm text-gray-600">Generate beautiful, branded, and persuasive sales proposals that build customer confidence and set you apart from the competition.</p>
@@ -309,24 +353,24 @@
     <section class="mx-auto w-full max-w-6xl px-6 py-20">
       <div class="mb-10 text-center">
         <h2 class="text-3xl md:text-4xl font-semibold tracking-tight">More Than Just Software. It's Your Unfair Advantage.</h2>
-        <p class="mt-3 text-gray-600">不止是工具，更是业务助推器</p>
+        <p class="mt-3 text-gray-600">More than a tool—it's a business accelerator.</p>
       </div>
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
         <!-- 模块一 -->
         <div class="rounded-3xl border border-gray-200 bg-white p-5">
-          <div class="aspect-[4/3] w-full rounded-xl bg-gradient-to-br from-gray-100 to-gray-200 flex items-center justify-center text-gray-600 text-sm">地址输入 + 预设模板预览 动图占位</div>
+          <div class="aspect-[4/3] w-full rounded-xl bg-gradient-to-br from-gray-100 to-gray-200 flex items-center justify-center text-gray-600 text-sm">Address input + preset template preview animation placeholder</div>
           <h3 class="mt-4 text-lg font-semibold">From Enquiry to Quote in Minutes</h3>
           <p class="mt-2 text-sm text-gray-600">Handle customer enquiries instantly. Use pre-built templates for your most popular packages or create a custom design on the fly. Respond to leads faster than your competitors and win the job before they've even opened their laptop.</p>
         </div>
         <!-- 模块二 -->
         <div class="rounded-3xl border border-gray-200 bg-white p-5">
-          <div class="aspect-[4/3] w-full rounded-xl bg-gradient-to-br from-emerald-50 to-emerald-100 flex items-center justify-center text-emerald-700 text-sm">3D 屋顶 + 阴影路径 + 组串示意 占位<br/><span class="mt-2 inline-flex items-center gap-2 rounded-full bg-emerald-600 text-white text-xs px-2.5 py-1">CEC Design Guidelines Compliant</span></div>
+          <div class="aspect-[4/3] w-full rounded-xl bg-gradient-to-br from-emerald-50 to-emerald-100 flex items-center justify-center text-emerald-700 text-sm">3D roof + shade path + stringing diagram placeholder<br/><span class="mt-2 inline-flex items-center gap-2 rounded-full bg-emerald-600 text-white text-xs px-2.5 py-1">CEC Design Guidelines Compliant</span></div>
           <h3 class="mt-4 text-lg font-semibold">Design with Unmatched Precision & Compliance</h3>
           <p class="mt-2 text-sm text-gray-600">Our platform uses the latest high-resolution aerial imagery (including Nearmap) and 3D data to ensure every measurement is precise. All designs are automatically checked against CEC guidelines, giving you and your customer complete peace of mind.</p>
         </div>
         <!-- 模块三 -->
         <div class="rounded-3xl border border-gray-200 bg-white p-5">
-          <div class="aspect-[4/3] w-full rounded-xl bg-gradient-to-br from-sky-50 to-sky-100 flex items-center justify-center text-sky-700 text-sm">品牌选择 + 成本/利润率 设置 动态占位</div>
+          <div class="aspect-[4/3] w-full rounded-xl bg-gradient-to-br from-sky-50 to-sky-100 flex items-center justify-center text-sky-700 text-sm">Brand selection + cost/margin settings placeholder</div>
           <h3 class="mt-4 text-lg font-semibold">Customised for YOUR Business</h3>
           <p class="mt-2 text-sm text-gray-600">This is your platform. Add your preferred panels, inverters, and batteries. Input your own pricing, labour costs, and profit margins. We provide the engine; you steer the business. It’s fully flexible to match the way you work.</p>
         </div>
@@ -337,7 +381,7 @@
     <section class="mx-auto w-full max-w-6xl px-6 py-20">
       <div class="mb-10 text-center">
         <h2 class="text-3xl md:text-4xl font-semibold tracking-tight">Join Hundreds of Aussie Installers Designing Smarter</h2>
-        <p class="mt-3 text-gray-600">加入澳洲顶尖安装商的行列</p>
+        <p class="mt-3 text-gray-600">Join Australia’s top installers.</p>
       </div>
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
         <!-- 左侧：客户评价 -->
@@ -347,7 +391,7 @@
             <div>
               <div class="font-semibold">Dave M., Sun-Powered Solar, VIC</div>
               <p class="mt-2 text-sm text-gray-700">“This tool has been a game-changer. I used to spend my evenings doing designs and proposals. Now I can get a fully detailed, professional quote out to a customer while I'm still in their driveway. My quote-to-sale conversion rate has genuinely increased by over 30%. ”</p>
-              <p class="mt-2 text-xs text-gray-500">更具体的业务指标，凸显转化率提升</p>
+              <p class="mt-2 text-xs text-gray-500">Add more specific business metrics to highlight conversion lift.</p>
             </div>
           </div>
         </div>
@@ -400,10 +444,10 @@
       };
       const state = {
         open: null,
-        solution: { plan: '智能省电' },
+        solution: { plan: 'Smart Saver' },
         brand: {
-          deviceType: '光伏组件',
-          selection: { '光伏组件': [], '逆变器': [], '储能设备': [] }
+          deviceType: 'PV Modules',
+          selection: { 'PV Modules': [], 'Inverters': [], 'Energy Storage': [] }
         },
         template: { section: null },
       };
@@ -460,17 +504,17 @@
       });
 
       document.getElementById('solution-apply').addEventListener('click', () => {
-        if (!state.solution.plan) state.solution.plan = '智能省电';
+        if (!state.solution.plan) state.solution.plan = 'Smart Saver';
         updateSummary();
         panels.solution.classList.add('hidden');
         state.open = null;
       });
 
-      // 品牌偏好 interactions
+      // Brand Preference interactions
       const brandMap = {
-        '光伏组件': ['REC','Jinko','Trina','LONGi','Qcells'],
-        '逆变器': ['Fronius','Sungrow','Enphase','GoodWe','SolarEdge'],
-        '储能设备': ['Tesla','BYD','AlphaESS','Sonnen','Enphase IQ Battery']
+        'PV Modules': ['REC','Jinko','Trina','LONGi','Qcells'],
+        'Inverters': ['Fronius','Sungrow','Enphase','GoodWe','SolarEdge'],
+        'Energy Storage': ['Tesla','BYD','AlphaESS','Sonnen','Enphase IQ Battery']
       };
 
       const brandDeviceTypeEl = document.getElementById('brand-device-type');
@@ -529,10 +573,10 @@
         state.template.section = section;
         templateDetailTitle.textContent = section;
         const descMap = {
-          'Equipment Packages': '预设您最常用的面板、逆变器和电池组合。',
-          'Design & Engineering Rules': '定义您的公司标准，如组件间距、安全边距和电气参数。',
-          'Pricing & Quoting Logic': '输入您的设备成本、人工费和利润率，实现自动化报价。',
-          'Proposal & Branding': '上传您的Logo，定制面向客户的方案报告外观和内容。'
+          'Equipment Packages': 'Preset your most common panel, inverter, and battery combinations.',
+          'Design & Engineering Rules': 'Define your company standards like spacing, safety offsets, and electrical parameters.',
+          'Pricing & Quoting Logic': 'Enter device costs, labour, and margins to automate quoting.',
+          'Proposal & Branding': 'Upload your logo and customise proposal appearance and content.'
         };
         templateDetailDesc.textContent = descMap[section] || '';
         templateMenuEl.classList.add('hidden');
@@ -560,13 +604,13 @@
 
       function updateSummary() {
         summary.classList.remove('hidden');
-        sSolution.textContent = `方案：${state.solution.plan || '-'}`;
+        sSolution.textContent = `Solution: ${state.solution.plan || '-'}`;
         const sel = state.brand.selection || {};
-        const c1 = (sel['光伏组件'] || []).length;
-        const c2 = (sel['逆变器'] || []).length;
-        const c3 = (sel['储能设备'] || []).length;
-        sBrand.textContent = `品牌偏好：组件(${c1}) / 逆变器(${c2}) / 储能(${c3})`;
-        sTemplate.textContent = `模板：My Business Templates / ${state.template.section || '-'}`;
+        const c1 = (sel['PV Modules'] || []).length;
+        const c2 = (sel['Inverters'] || []).length;
+        const c3 = (sel['Energy Storage'] || []).length;
+        sBrand.textContent = `Brands: PV Modules(${c1}) / Inverters(${c2}) / Energy Storage(${c3})`;
+        sTemplate.textContent = `Template: My Business Templates / ${state.template.section || '-'}`;
         lucide.createIcons();
       }
 
@@ -587,7 +631,7 @@
 
       // Send (demo)
       document.getElementById('btn-send').addEventListener('click', () => {
-        console.log('发送内容：', {
+        console.log('Send payload:', {
           prompt: document.getElementById('prompt').value,
           solution: state.solution,
           brand: state.brand,
