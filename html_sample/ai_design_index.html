@@ -485,12 +485,34 @@
 
       function selectInGroup(container, value) {
         container.querySelectorAll('button').forEach(b => {
-          if (b.getAttribute('data-value') === value) {
+          const isActive = b.getAttribute('data-value') === value;
+          const titleEl = b.querySelector('.text-sm.font-medium');
+          const descEl = b.querySelector('p');
+
+          if (isActive) {
             b.classList.add('bg-gray-900','text-white','border-gray-900');
             b.classList.remove('bg-white','text-gray-700');
+            // improve readability on dark background
+            if (titleEl) {
+              titleEl.classList.remove('text-gray-900');
+              titleEl.classList.add('text-white');
+            }
+            if (descEl) {
+              descEl.classList.remove('text-gray-600');
+              descEl.classList.add('text-gray-300');
+            }
           } else {
             b.classList.remove('bg-gray-900','text-white','border-gray-900');
             b.classList.add('bg-white','text-gray-700');
+            // restore original colors
+            if (titleEl) {
+              titleEl.classList.remove('text-white');
+              titleEl.classList.add('text-gray-900');
+            }
+            if (descEl) {
+              descEl.classList.remove('text-gray-300');
+              descEl.classList.add('text-gray-600');
+            }
           }
         });
       }
