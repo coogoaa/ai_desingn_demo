@@ -79,63 +79,48 @@
                 <button data-close="solution" class="rounded-lg p-1.5 text-gray-500 hover:bg-gray-50"><i data-lucide="x" class="h-4 w-4"></i></button>
               </div>
               <div class="px-4 pb-4">
-                <p class="text-sm text-gray-600 mb-3">选择内容类型与优先级。</p>
-                <!-- 类型 -->
-                <div class="mb-4">
-                  <div class="text-xs text-gray-500 mb-2">类型</div>
-                  <div id="solution-type" class="flex flex-wrap gap-2">
-                    <button data-value="落地页" class="pill-btn">落地页</button>
-                    <button data-value="品牌海报" class="pill-btn">品牌海报</button>
-                    <button data-value="社媒卡片" class="pill-btn">社媒卡片</button>
-                    <button data-value="邮件" class="pill-btn">邮件</button>
-                    <button data-value="演示文稿" class="pill-btn">演示文稿</button>
-                  </div>
+                <p class="text-sm text-gray-600 mb-3">请选择一个适合客户的方案。</p>
+                <div id="solution-plans" class="grid grid-cols-2 gap-2">
+                  <button data-value="智能省电" class="pill-btn">智能省电</button>
+                  <button data-value="高效能源" class="pill-btn">高效能源</button>
+                  <button data-value="能源独立" class="pill-btn">能源独立</button>
+                  <button data-value="终极能源" class="pill-btn">终极能源</button>
                 </div>
-                <!-- 优先级 -->
-                <div class="mb-4">
-                  <div class="text-xs text-gray-500 mb-2">优先级</div>
-                  <div id="solution-priority" class="flex flex-wrap gap-2">
-                    <button data-value="标准" class="pill-btn">标准</button>
-                    <button data-value="极速" class="pill-btn">极速</button>
-                    <button data-value="高级" class="pill-btn">高级</button>
-                  </div>
-                </div>
-                <div class="flex items-center justify-end gap-2">
+                <div class="mt-4 flex items-center justify-end gap-2">
                   <button data-close="solution" class="rounded-xl px-3 py-2 text-sm text-gray-600 hover:bg-gray-50">取消</button>
                   <button id="solution-apply" class="rounded-xl bg-gray-900 px-3.5 py-2 text-sm text-white hover:bg-gray-800">确定</button>
                 </div>
               </div>
             </div>
 
-            <!-- 品牌参考 Panel -->
+            <!-- 品牌偏好 Panel -->
             <div id="panel-brand" class="pointer-events-auto hidden rounded-2xl border border-gray-200 bg-white shadow-2xl">
               <div class="flex items-center justify-between px-4 py-3">
                 <div class="flex items-center gap-2">
                   <i data-lucide="bookmark-check" class="h-4 w-4 text-gray-800"></i>
-                  <h3 class="text-base font-medium tracking-tight text-gray-900">品牌参考</h3>
+                  <h3 class="text-base font-medium tracking-tight text-gray-900">品牌偏好</h3>
                 </div>
                 <button data-close="brand" class="rounded-lg p-1.5 text-gray-500 hover:bg-gray-50"><i data-lucide="x" class="h-4 w-4"></i></button>
               </div>
               <div class="px-4 pb-4">
-                <p class="text-sm text-gray-600 mb-3">选择品牌类型与具体品牌。</p>
-                <!-- 品牌类型（自定义下拉） -->
+                <p class="text-sm text-gray-600 mb-3">先选择设备类型，再多选品牌。</p>
+                <!-- 设备类型 -->
                 <div class="mb-4">
-                  <div class="text-xs text-gray-500 mb-2">类型</div>
-                  <div id="brand-type" class="flex flex-wrap gap-2">
-                    <button data-value="科技" class="pill-btn">科技</button>
-                    <button data-value="时尚" class="pill-btn">时尚</button>
-                    <button data-value="运动" class="pill-btn">运动</button>
-                    <button data-value="金融" class="pill-btn">金融</button>
-                    <button data-value="生活方式" class="pill-btn">生活方式</button>
+                  <div class="text-xs text-gray-500 mb-2">设备类型</div>
+                  <div id="brand-device-type" class="flex flex-wrap gap-2">
+                    <button data-value="光伏组件" class="pill-btn">光伏组件</button>
+                    <button data-value="逆变器" class="pill-btn">逆变器</button>
+                    <button data-value="储能设备" class="pill-btn">储能设备</button>
                   </div>
                 </div>
-                <!-- 品牌列表 -->
-                <div class="mb-4">
-                  <div class="text-xs text-gray-500 mb-2">品牌</div>
+                <!-- 品牌多选列表 -->
+                <div class="mb-2">
+                  <div class="text-xs text-gray-500 mb-2">品牌（可多选）</div>
                   <div id="brand-list" class="grid grid-cols-2 sm:grid-cols-3 gap-2">
-                    <!-- items injected by JS based on type -->
+                    <!-- items injected by JS based on device type -->
                   </div>
                 </div>
+                <div class="text-xs text-gray-500">已选计数将显示在总结中</div>
                 <div class="flex items-center justify-end gap-2">
                   <button data-close="brand" class="rounded-xl px-3 py-2 text-sm text-gray-600 hover:bg-gray-50">取消</button>
                   <button id="brand-apply" class="rounded-xl bg-gray-900 px-3.5 py-2 text-sm text-white hover:bg-gray-800">确定</button>
@@ -148,29 +133,47 @@
               <div class="flex items-center justify-between px-4 py-3">
                 <div class="flex items-center gap-2">
                   <i data-lucide="layout-grid" class="h-4 w-4 text-gray-800"></i>
-                  <h3 class="text-base font-medium tracking-tight text-gray-900">定制模板</h3>
+                  <h3 class="text-base font-medium tracking-tight text-gray-900">My Business Templates（我的业务模板）</h3>
                 </div>
                 <button data-close="template" class="rounded-lg p-1.5 text-gray-500 hover:bg-gray-50"><i data-lucide="x" class="h-4 w-4"></i></button>
               </div>
               <div class="px-4 pb-4">
-                <p class="text-sm text-gray-600 mb-3">选择模板类型并选中一个模板。</p>
-                <!-- 模板类型 -->
-                <div class="mb-4">
-                  <div class="text-xs text-gray-500 mb-2">类型</div>
-                  <div id="template-type" class="flex flex-wrap gap-2">
-                    <button data-value="海报" class="pill-btn">海报</button>
-                    <button data-value="卡片" class="pill-btn">卡片</button>
-                    <button data-value="简报" class="pill-btn">简报</button>
-                    <button data-value="电商" class="pill-btn">电商</button>
+                <!-- 一级菜单：四个卡片 -->
+                <div id="template-menu" class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  <button data-section="Equipment Packages" class="group rounded-2xl border border-gray-200 p-4 text-left hover:border-gray-300">
+                    <div class="aspect-[16/9] rounded-lg bg-gradient-to-br from-gray-100 to-gray-200 flex items-center justify-center text-gray-600 text-sm">设备套餐占位</div>
+                    <div class="mt-3 font-semibold">Equipment Packages（设备套餐）</div>
+                    <p class="mt-1 text-sm text-gray-600">预设您最常用的面板、逆变器和电池组合。</p>
+                  </button>
+                  <button data-section="Design & Engineering Rules" class="group rounded-2xl border border-gray-200 p-4 text-left hover:border-gray-300">
+                    <div class="aspect-[16/9] rounded-lg bg-gradient-to-br from-emerald-50 to-emerald-100 flex items-center justify-center text-emerald-700 text-sm">设计与工程规范占位</div>
+                    <div class="mt-3 font-semibold">Design & Engineering Rules（设计与工程规范）</div>
+                    <p class="mt-1 text-sm text-gray-600">定义您的公司标准，如组件间距、安全边距和电气参数。</p>
+                  </button>
+                  <button data-section="Pricing & Quoting Logic" class="group rounded-2xl border border-gray-200 p-4 text-left hover:border-gray-300">
+                    <div class="aspect-[16/9] rounded-lg bg-gradient-to-br from-sky-50 to-sky-100 flex items-center justify-center text-sky-700 text-sm">定价与报价逻辑占位</div>
+                    <div class="mt-3 font-semibold">Pricing & Quoting Logic（定价与报价逻辑）</div>
+                    <p class="mt-1 text-sm text-gray-600">输入您的设备成本、人工费和利润率，实现自动化报价。</p>
+                  </button>
+                  <button data-section="Proposal & Branding" class="group rounded-2xl border border-gray-200 p-4 text-left hover:border-gray-300">
+                    <div class="aspect-[16/9] rounded-lg bg-gradient-to-br from-violet-50 to-violet-100 flex items-center justify-center text-violet-700 text-sm">方案报告与品牌占位</div>
+                    <div class="mt-3 font-semibold">Proposal & Branding（方案报告与品牌）</div>
+                    <p class="mt-1 text-sm text-gray-600">上传您的Logo，定制面向客户的方案报告外观和内容。</p>
+                  </button>
+                </div>
+                <!-- 二级页面占位 -->
+                <div id="template-detail" class="hidden">
+                  <div class="flex items-center justify-between mb-3">
+                    <div class="text-sm text-gray-500">模板配置</div>
+                    <button id="template-back" class="inline-flex items-center gap-1 rounded-xl border border-gray-200 px-2.5 py-1.5 text-sm hover:bg-gray-50"><i data-lucide="arrow-left" class="h-4 w-4"></i> 返回</button>
                   </div>
-                </div>
-                <!-- 模板网格 -->
-                <div id="template-grid" class="grid grid-cols-2 sm:grid-cols-3 gap-3">
-                  <!-- cards injected by JS -->
-                </div>
-                <div class="mt-4 flex items-center justify-end gap-2">
-                  <button data-close="template" class="rounded-xl px-3 py-2 text-sm text-gray-600 hover:bg-gray-50">取消</button>
-                  <button id="template-apply" class="rounded-xl bg-gray-900 px-3.5 py-2 text-sm text-white hover:bg-gray-800">确定</button>
+                  <div class="rounded-2xl border border-gray-200 p-4">
+                    <div id="template-detail-title" class="font-semibold text-gray-900">Section</div>
+                    <p id="template-detail-desc" class="mt-1 text-sm text-gray-600">这里展示二级配置内容的占位说明。</p>
+                  </div>
+                  <div class="mt-4 flex items-center justify-end">
+                    <button id="template-apply" class="rounded-xl bg-gray-900 px-3.5 py-2 text-sm text-white hover:bg-gray-800">设为当前</button>
+                  </div>
                 </div>
               </div>
             </div>
@@ -397,9 +400,12 @@
       };
       const state = {
         open: null,
-        solution: { type: null, priority: null },
-        brand: { type: '科技', item: null },
-        template: { type: '海报', id: null },
+        solution: { plan: '智能省电' },
+        brand: {
+          deviceType: '光伏组件',
+          selection: { '光伏组件': [], '逆变器': [], '储能设备': [] }
+        },
+        template: { section: null },
       };
 
       function openPanel(name) {
@@ -431,8 +437,7 @@
       });
 
       // 方案选择 interactions
-      const solTypeEl = document.getElementById('solution-type');
-      const solPrioEl = document.getElementById('solution-priority');
+      const solPlansEl = document.getElementById('solution-plans');
 
       function selectInGroup(container, value) {
         container.querySelectorAll('button').forEach(b => {
@@ -446,148 +451,104 @@
         });
       }
 
-      solTypeEl.addEventListener('click', (e) => {
-        if (e.target.closest('button')) {
-          const val = e.target.closest('button').getAttribute('data-value');
-          state.solution.type = val;
-          selectInGroup(solTypeEl, val);
-        }
-      });
-      solPrioEl.addEventListener('click', (e) => {
-        if (e.target.closest('button')) {
-          const val = e.target.closest('button').getAttribute('data-value');
-          state.solution.priority = val;
-          selectInGroup(solPrioEl, val);
-        }
+      solPlansEl.addEventListener('click', (e) => {
+        const btn = e.target.closest('button');
+        if (!btn) return;
+        const val = btn.getAttribute('data-value');
+        state.solution.plan = val;
+        selectInGroup(solPlansEl, val);
       });
 
       document.getElementById('solution-apply').addEventListener('click', () => {
-        if (!state.solution.type) state.solution.type = '落地页';
-        if (!state.solution.priority) state.solution.priority = '标准';
+        if (!state.solution.plan) state.solution.plan = '智能省电';
         updateSummary();
         panels.solution.classList.add('hidden');
         state.open = null;
       });
 
-      // 品牌参考 interactions
+      // 品牌偏好 interactions
       const brandMap = {
-        '科技': ['Apple','Google','Microsoft','Adobe','Samsung','Sony'],
-        '时尚': ['Gucci','Prada','Chanel','Dior','Zara','Uniqlo'],
-        '运动': ['Nike','Adidas','Puma','New Balance','Asics','The North Face'],
-        '金融': ['Visa','Mastercard','Amex','Stripe','Revolut','Monzo'],
-        '生活方式': ['IKEA','Muji','Starbucks','Airbnb','Spotify','Netflix'],
+        '光伏组件': ['REC','Jinko','Trina','LONGi','Qcells'],
+        '逆变器': ['Fronius','Sungrow','Enphase','GoodWe','SolarEdge'],
+        '储能设备': ['Tesla','BYD','AlphaESS','Sonnen','Enphase IQ Battery']
       };
 
-      const brandTypeEl = document.getElementById('brand-type');
+      const brandDeviceTypeEl = document.getElementById('brand-device-type');
       const brandListEl = document.getElementById('brand-list');
 
-      function renderBrands(type) {
+      function renderBrandsFor(type) {
         brandListEl.innerHTML = '';
+        const selected = new Set(state.brand.selection[type] || []);
         (brandMap[type] || []).forEach(name => {
           const btn = document.createElement('button');
           btn.type = 'button';
           btn.setAttribute('data-value', name);
-          btn.className = 'group flex items-center justify-between rounded-xl border border-gray-200 bg-white px-3 py-2 text-sm hover:bg-gray-50 hover:border-gray-300';
+          btn.className = 'group flex items-center justify-between rounded-xl border bg-white px-3 py-2 text-sm hover:bg-gray-50';
+          if (selected.has(name)) btn.classList.add('border-gray-900'); else btn.classList.add('border-gray-200');
           btn.innerHTML = `
             <span class="truncate text-gray-800">${name}</span>
-            <span class="hidden group-[.selected]:block text-gray-900"><i data-lucide="check" class="h-4 w-4"></i></span>
+            <span class="${selected.has(name) ? '' : 'hidden'} text-gray-900"><i data-lucide="check" class="h-4 w-4"></i></span>
           `;
           btn.addEventListener('click', () => {
-            Array.from(brandListEl.children).forEach(c => c.classList.remove('selected','border-gray-900'));
-            btn.classList.add('selected','border-gray-900');
-            state.brand.item = name;
-            lucide.createIcons();
+            const list = new Set(state.brand.selection[type] || []);
+            if (list.has(name)) list.delete(name); else list.add(name);
+            state.brand.selection[type] = Array.from(list);
+            renderBrandsFor(type);
           });
           brandListEl.appendChild(btn);
         });
         lucide.createIcons();
       }
 
-      brandTypeEl.addEventListener('click', (e) => {
-        if (e.target.closest('button')) {
-          const val = e.target.closest('button').getAttribute('data-value');
-          state.brand.type = val;
-          selectInGroup(brandTypeEl, val);
-          state.brand.item = null;
-          renderBrands(val);
-        }
+      brandDeviceTypeEl.addEventListener('click', (e) => {
+        const btn = e.target.closest('button');
+        if (!btn) return;
+        const val = btn.getAttribute('data-value');
+        state.brand.deviceType = val;
+        selectInGroup(brandDeviceTypeEl, val);
+        renderBrandsFor(val);
       });
 
       document.getElementById('brand-apply').addEventListener('click', () => {
-        if (!state.brand.item) state.brand.item = (brandMap[state.brand.type] || [])[0] || '-';
         updateSummary();
         panels.brand.classList.add('hidden');
         state.open = null;
       });
 
-      // 定制模板 interactions
-      const templateTypeEl = document.getElementById('template-type');
-      const templateGridEl = document.getElementById('template-grid');
+      // 定制模板 interactions（一级菜单 + 二级页面）
+      const templateMenuEl = document.getElementById('template-menu');
+      const templateDetailEl = document.getElementById('template-detail');
+      const templateBackEl = document.getElementById('template-back');
+      const templateDetailTitle = document.getElementById('template-detail-title');
+      const templateDetailDesc = document.getElementById('template-detail-desc');
 
-      const templateImages = {
-        '海报': [
-          'https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=1200&auto=format&fit=crop',
-          'https://images.unsplash.com/photo-1501785888041-af3ef285b470?q=80&w=1200&auto=format&fit=crop',
-          'https://images.unsplash.com/photo-1496302662116-25b3dd09a54b?q=80&w=1200&auto=format&fit=crop'
-        ],
-        '卡片': [
-          'https://images.unsplash.com/photo-1608138407090-9d524453a3ce?q=80&w=1200&auto=format&fit=crop',
-          'https://images.unsplash.com/photo-1517816743773-6e0fd518b4a6?q=80&w=1200&auto=format&fit=crop',
-          'https://images.unsplash.com/photo-1496307042754-b4aa456c4a2d?q=80&w=1200&auto=format&fit=crop'
-        ],
-        '简报': [
-          'https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=1200&auto=format&fit=crop',
-          'https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?q=80&w=1200&auto=format&fit=crop',
-          'https://images.unsplash.com/photo-1522199755839-a2bacb67c546?q=80&w=1200&auto=format&fit=crop'
-        ],
-        '电商': [
-          'https://images.unsplash.com/photo-1514944152558-30bfbfdf5eaf?q=80&w=1200&auto=format&fit=crop',
-          'https://images.unsplash.com/photo-1520975922203-bf7bd9b1f7d4?q=80&w=1200&auto=format&fit=crop',
-          'https://images.unsplash.com/photo-1512436991641-6745cdb1723f?q=80&w=1200&auto=format&fit=crop'
-        ],
-      };
+      templateMenuEl.addEventListener('click', (e) => {
+        const btn = e.target.closest('button[data-section]');
+        if (!btn) return;
+        const section = btn.getAttribute('data-section');
+        state.template.section = section;
+        templateDetailTitle.textContent = section;
+        const descMap = {
+          'Equipment Packages': '预设您最常用的面板、逆变器和电池组合。',
+          'Design & Engineering Rules': '定义您的公司标准，如组件间距、安全边距和电气参数。',
+          'Pricing & Quoting Logic': '输入您的设备成本、人工费和利润率，实现自动化报价。',
+          'Proposal & Branding': '上传您的Logo，定制面向客户的方案报告外观和内容。'
+        };
+        templateDetailDesc.textContent = descMap[section] || '';
+        templateMenuEl.classList.add('hidden');
+        templateDetailEl.classList.remove('hidden');
+      });
 
-      function renderTemplates(type) {
-        templateGridEl.innerHTML = '';
-        (templateImages[type] || []).forEach((src, idx) => {
-          const id = `${type}-${idx+1}`;
-          const card = document.createElement('button');
-          card.type = 'button';
-          card.setAttribute('data-id', id);
-          card.className = 'group relative overflow-hidden rounded-2xl border border-gray-200 bg-white text-left hover:border-gray-300';
-          card.innerHTML = `
-            <div class="aspect-[4/3] w-full overflow-hidden">
-              <img src="${src}" alt="${type} 模板 ${idx+1}" class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-[1.03]" />
-            </div>
-            <div class="flex items-center justify-between px-3 py-2">
-              <div class="text-sm text-gray-800 truncate">${type} · 模板 ${idx+1}</div>
-              <span class="hidden group-[.selected]:inline-flex items-center rounded-lg bg-gray-900 px-1.5 py-0.5 text-[11px] font-medium text-white">已选</span>
-            </div>
-            <div class="pointer-events-none absolute inset-0 hidden group-[.selected]:block ring-2 ring-inset ring-gray-900 rounded-2xl"></div>
-          `;
-          card.addEventListener('click', () => {
-            Array.from(templateGridEl.children).forEach(c => c.classList.remove('selected'));
-            card.classList.add('selected');
-            state.template.id = id;
-          });
-          templateGridEl.appendChild(card);
-        });
-      }
-
-      templateTypeEl.addEventListener('click', (e) => {
-        if (e.target.closest('button')) {
-          const val = e.target.closest('button').getAttribute('data-value');
-          state.template.type = val;
-          selectInGroup(templateTypeEl, val);
-          state.template.id = null;
-          renderTemplates(val);
-        }
+      templateBackEl.addEventListener('click', () => {
+        templateDetailEl.classList.add('hidden');
+        templateMenuEl.classList.remove('hidden');
       });
 
       document.getElementById('template-apply').addEventListener('click', () => {
-        if (!state.template.id) state.template.id = `${state.template.type}-1`;
         updateSummary();
         panels.template.classList.add('hidden');
+        templateDetailEl.classList.add('hidden');
+        templateMenuEl.classList.remove('hidden');
         state.open = null;
       });
 
@@ -599,9 +560,13 @@
 
       function updateSummary() {
         summary.classList.remove('hidden');
-        sSolution.textContent = `方案：${state.solution.type || '-'} / ${state.solution.priority || '-'}`;
-        sBrand.textContent = `品牌：${state.brand.type || '-'} / ${state.brand.item || '-'}`;
-        sTemplate.textContent = `模板：${state.template.type || '-'} / ${state.template.id || '-'}`;
+        sSolution.textContent = `方案：${state.solution.plan || '-'}`;
+        const sel = state.brand.selection || {};
+        const c1 = (sel['光伏组件'] || []).length;
+        const c2 = (sel['逆变器'] || []).length;
+        const c3 = (sel['储能设备'] || []).length;
+        sBrand.textContent = `品牌偏好：组件(${c1}) / 逆变器(${c2}) / 储能(${c3})`;
+        sTemplate.textContent = `模板：My Business Templates / ${state.template.section || '-'}`;
         lucide.createIcons();
       }
 
@@ -640,12 +605,9 @@
         // style pill buttons after DOM paint
         stylePillButtons(document);
         // defaults
-        selectInGroup(solTypeEl, '落地页'); state.solution.type = '落地页';
-        selectInGroup(solPrioEl, '标准'); state.solution.priority = '标准';
-        selectInGroup(brandTypeEl, state.brand.type);
-        renderBrands(state.brand.type);
-        selectInGroup(templateTypeEl, state.template.type);
-        renderTemplates(state.template.type);
+        selectInGroup(solPlansEl, state.solution.plan);
+        selectInGroup(brandDeviceTypeEl, state.brand.deviceType);
+        renderBrandsFor(state.brand.deviceType);
         lucide.createIcons();
       }
       document.addEventListener('DOMContentLoaded', initDefaults);
